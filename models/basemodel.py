@@ -105,6 +105,7 @@ class BaseModel:
         :return: probabilities for the classes (Shape N x C)
         """
 
+        print(f"\n X.shape:  \n {X.shape} \n")
         self.prediction_probabilities = self.model.predict_proba(X)
 
         # If binary task returns only probability for the true class, adapt it to return (N x 2)
@@ -169,10 +170,8 @@ class BaseModel:
             y = np.concatenate((y_true.reshape(-1, 1), self.predictions.reshape(-1, 1)), axis=1)
         else:
             # Save array where [:,0] is the truth and [:,1:] are the prediction probabilities
-            print(f"y_true: {y_true}")
-            print(f"self.prediction_probabilities: {self.prediction_probabilities}")
-            print(f"y_true.shape: {y_true.shape}")
-            print(f"self.prediction_probabilities.shape: {self.prediction_probabilities.shape}")
+            print(f"\n y_true: \n {y_true} \n")
+            print(f"\n self.prediction_probabilities: \n {self.prediction_probabilities} \n")
             y = np.concatenate((y_true.reshape(-1, 1), self.prediction_probabilities), axis=1)
 
         save_predictions_to_file(y, self.args, filename_extension)
