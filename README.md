@@ -41,7 +41,7 @@ In the docker file, different conda environments are specified for the various
 requirements of the models. Therefore, building the container for the first time takes a
 while.
 
-Just build it as usual via `docker build -t <image name> <path to Dockerfile>`.
+Just build it as usual via `docker build -t tabsurvey TabSurvey/` or `docker build -t tabsurvey .`.
 
 To start the docker container then run:
 
@@ -68,7 +68,7 @@ Now you can navigate to the right directory with `cd opt/notebooks/`.
 
 To run a single model on a single dataset call:
 
-``python train.py --config/<config-file of the dataset>.yml --model_name <Name of the Model>``
+``python train.py  --config config/covertype.yml --model_name BCNEstimator --optimize_hyperparameters``
 
 All parameters set in the config file, can be overwritten by command line arguments, for example:
 

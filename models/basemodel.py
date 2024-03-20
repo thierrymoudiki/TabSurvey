@@ -169,6 +169,10 @@ class BaseModel:
             y = np.concatenate((y_true.reshape(-1, 1), self.predictions.reshape(-1, 1)), axis=1)
         else:
             # Save array where [:,0] is the truth and [:,1:] are the prediction probabilities
+            print(f"y_true: {y_true}")
+            print(f"self.prediction_probabilities: {self.prediction_probabilities}")
+            print(f"y_true.shape: {y_true.shape}")
+            print(f"self.prediction_probabilities.shape: {self.prediction_probabilities.shape}")
             y = np.concatenate((y_true.reshape(-1, 1), self.prediction_probabilities), axis=1)
 
         save_predictions_to_file(y, self.args, filename_extension)
