@@ -68,7 +68,7 @@ Now you can navigate to the right directory with `cd opt/notebooks/`.
 
 To run a single model on a single dataset call:
 
-``python train.py  --config config/covertype.yml --model_name BCNEstimator --optimize_hyperparameters``
+``python train.py  --config config/covertype.yml --model_name BCNEstimator --optimize_hyperparameters --n_trials 100``
 
 All parameters set in the config file, can be overwritten by command line arguments, for example:
 
