@@ -38,12 +38,12 @@ class BCNEstimator(BaseModel):
         # lower_bound = np.array([   3,    -6, -10, -10,   -6, 0.8, 1]),
         # upper_bound = np.array([ 100,  -0.1,  10,  -1, -0.1,   1, 4]),                    
         params = {
-            "B": trial.suggest_int("B", 3, 100, log=True),
+            "B": trial.suggest_int("B", 10, 1000, log=True),
             "nu": trial.suggest_float("nu", 1e-6, 10**-0.1, log=True),
             "lam": trial.suggest_float("lam", 1e-10, 1e10, log=True),
             "r": trial.suggest_float("r", 1 - 1e-1, 1 - 1e-10, log=True),
             "tol": trial.suggest_float("tol", 1e-6, 10**-0.1, log=True),
-            "col_sample": trial.suggest_float("col_sample", 0.8, 1, log=True),
+            "col_sample": trial.suggest_float("col_sample", 0.7, 1, log=True),
             "n_clusters": trial.suggest_int("n_clusters", 2, 4)
         }
         return params
