@@ -2,10 +2,12 @@ import logging
 import sys
 
 import nnetsauce as ns 
+import numpy as np 
 
 import optuna
 
 from models import str2model
+from time import time 
 from utils.load_data import load_data
 from utils.scorer import get_scorer
 from utils.timer import Timer
@@ -103,7 +105,7 @@ class Objective(object):
 
 def main(args):
     print("Start hyperparameter optimization")
-    X, y = load_data(args)
+    X, y = load_data(args)    
 
     model_name = str2model(args.model_name)
 
@@ -125,14 +127,7 @@ def main(args):
 
 def main_once(args):
     print("Train model with given hyperparameters")
-    X, y = load_data(args)
-    if len(y) >= 3000:
-        start = time()
-        sub = ns.SubSampler(y=y.ravel().astype(np.uint8),
-                          n_samples=3000, seed=123, n_jobs=-1)
-        idx_rows  = sub.subsample()
-        X, y = X.copy()[idx_rows,:], y.copy()[idx_rows]
-        print(f"Elapsed time for subsampling: {time() - start}")
+    X, y = load_data(args)    
 
     model_name = str2model(args.model_name)
 

@@ -1,6 +1,8 @@
 import sklearn.datasets
 from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
+from time import time
 
+import nnetsauce as ns 
 import numpy as np
 import pandas as pd
 
@@ -107,6 +109,14 @@ def load_data(args):
 
     else:
         raise AttributeError("Dataset \"" + args.dataset + "\" not available")
+
+    if len(y) >= 3000:
+        start = time()
+        sub = ns.SubSampler(y=y.ravel().astype(np.uint8),
+                          n_samples=3000, seed=123, n_jobs=-1)
+        idx_rows  = sub.subsample()
+        X, y = X.copy()[idx_rows,:], y.copy()[idx_rows]
+        print(f"Elapsed time for subsampling: {time() - start}")
 
     print("Dataset loaded!")
     print(X.shape)
